@@ -18,5 +18,11 @@ namespace temp {
         return data;
     }
 
+    void deleteTemperatureData(TemperatureData* data) {
+        if (!data) return;  // Проверка на nullptr
+        delete[] data->temperatures;  // Освобождение массива температур
+        delete[] data->unit;  // Освобождение строки единицы
+        delete data;  // Освобождение структуры
+    }
 
 }  // namespace temp
