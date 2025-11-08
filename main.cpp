@@ -31,8 +31,32 @@ int main() {
     print_temperatures(data);
 
 
+    // Подсчет выше 20°C (используя вспомогательную функцию)
+    int above = countInRange(data, above_20);
+    std::cout << "Temperatures above 20°C: " << above << std::endl;
 
+    // Лямбда для другого диапазона (ниже 100°F, но пока в C, для демонстрации)
+    auto below_100f = [](float t) -> bool { return t < 100.0f; };  // Лямбда-выражение
+    int below = countInRange(data, below_100f);
+    std::cout << "Temperatures below 100°F (equivalent): " << below << std::endl;
 
+    // Конвертация в Фаренгейты
+    convertTemperatures(data, c_to_f);
+    std::cout << "After conversion to F: ";
+    print_temperatures(data);
+
+    // Агрегаты (макс и среднее)
+    float max_temp = aggregate(data, max_op);
+    std::cout << "Maximum: " << max_temp << std::endl;
+
+    float sum = aggregate(data, sum_op);
+    float avg = sum / data->count;
+    std::cout << "Average: " << avg << std::endl;
+
+    // Демонстрация константной ссылки (лямбда с const ref для чтения)
+    auto print_data = [](const TemperatureData& d) {  // Передача по константной ссылке
+        std::cout << "Unit: " << d.unit << ", Count: " << d.count << std::endl;
+        };
 
 
 
